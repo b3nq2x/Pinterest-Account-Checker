@@ -1,2 +1,2 @@
-pip install pandas numpy playwright
+pip install pandas numpy playwright<br>
 playwright install
