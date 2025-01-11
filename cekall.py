@@ -40,7 +40,7 @@ async def main():
 
     async with async_playwright() as p:
         # Pilih browser (bisa 'chromium', 'firefox', atau 'webkit')
-        browser = await p.chromium.launch(headless=False)
+        browser = await p.chromium.launch(headless=True)
         context = await browser.new_context()
 
         # Muat cookie dari file
@@ -57,8 +57,7 @@ async def main():
             original_link = row["Profile"]
             parsed_url = urlparse(original_link)
             username = parsed_url.path.strip("/").split("/")[0]  # Ambil bagian setelah domain dan hilangkan "/"
-            api_link = f"https://api.pinterest.com/v3/users/{username}/"  # Buat API link
-            print(f"Membuka link API: {api_link}")
+            api_link = f"https://api.pinterest.com/v3/users/{username}/"  # Buat API link            
 
             # Gunakan tab yang sama untuk membuka link berikutnya
             await page.goto(api_link)
