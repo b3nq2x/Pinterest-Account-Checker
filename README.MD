@@ -12,3 +12,5 @@ cekall.py untuk mengetahui status Indexed, Jumlah Follower, Jumlah	Following, Ju
 - Jika pada kolom Indexing tercatat <b>True</b> maka status akun <b>Aktif dan Terindex</b>
 - Jika pada kolom Indexing tercatat <b>False</b> maka status akun <b>Shadow Ban</b>
 - Jika pada kolom Indexing tercatat <b>Deactive</b> maka status akun <b>Suspended</b>
+
+ok
