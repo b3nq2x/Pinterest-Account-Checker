@@ -23,3 +23,6 @@ playwright install
 - Jika pada kolom Indexing tercatat <b>Deactive</b> maka status akun <b>Suspended</b><br>  
 <br>
 <img src="https://blogger.googleusercontent.com/img/a/AVvXsEj8XkxEwdz1fGLAiUq14cKoG0PBsPtblYiV3Q71zIIvSbAgI6wTPImuMNliJamc2Tq9gZESvopAcBf2if4EN1RgplD15dGcws0BlnRPQ6CCgDDFS2AtmVjE2Zwh1iz4qcrrZODkbFDcRZ2TjtmFc8vZGXk8TM8SHgsOpIMGPLAcgHoG6iTO8mVCuvwlXI0L"/>
+<br>
+<br>
+<b>NOTE : Jangan membuka file status.csv saat script sedang dijalankan</b>
