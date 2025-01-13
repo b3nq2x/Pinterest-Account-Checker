@@ -12,8 +12,8 @@ Input link profil yang akan di cek pada kolom <b>Profile</b>
 <img src="https://blogger.googleusercontent.com/img/a/AVvXsEjQI35vmY36ScBg2aLeXa91vvXPxb3sCaFIXUYbmTgvKHcJqvbg3cadKnIBZgb-3dF0gXTVLR0JtgNONhNz3i6CSYCXe0sMMo4I_VQFZEYmTB-3NC_M9JQpCOABgw9r9v2VsMAnjyMqpAlEGD0850fA-IJPlmEDnAtRl9nm61rHmmuCmFuiuGE1ItYpdg_f"/>
 <br><br><br>
 🔥 <b>cekall.py</b> untuk mengetahui status Indexed, Jumlah Follower, Jumlah	Following, Jumlah Boards, Jumlah Pins & jumlah Views / month :<br>
-- Jika pada kolom Indexing tercatat <b>True</b> maka status akun <b>Aktif dan Terindex</b>  
-- Jika pada kolom Indexing tercatat <b>False</b> maka status akun <b>Shadow Ban</b>  
-- Jika pada kolom Indexing tercatat <b>Deactive</b> maka status akun <b>Suspended</b>  
+- Jika pada kolom Indexing tercatat <b>True</b> maka status akun <b>Aktif dan Terindex</b><br>  
+- Jika pada kolom Indexing tercatat <b>False</b> maka status akun <b>Shadow Ban</b><br>  
+- Jika pada kolom Indexing tercatat <b>Deactive</b> maka status akun <b>Suspended</b><br>  
 <br>
 <img src="https://blogger.googleusercontent.com/img/a/AVvXsEj8XkxEwdz1fGLAiUq14cKoG0PBsPtblYiV3Q71zIIvSbAgI6wTPImuMNliJamc2Tq9gZESvopAcBf2if4EN1RgplD15dGcws0BlnRPQ6CCgDDFS2AtmVjE2Zwh1iz4qcrrZODkbFDcRZ2TjtmFc8vZGXk8TM8SHgsOpIMGPLAcgHoG6iTO8mVCuvwlXI0L"/>
