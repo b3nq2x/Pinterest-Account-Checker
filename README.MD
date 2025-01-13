@@ -1,5 +1,11 @@
-1. pip install pandas numpy playwright<br>
-2. playwright install
+<code>git clone https://github.com/b3nq2x/Pinterest-Account-Checker.git</code>
+<h3>INSTALL :</h3>
+pip install pandas numpy playwright<br>
+playwright install
+
+1. Buat file 1 file cookie menggunakan <a href="https://github.com/b3nq2x/Pinterest-Login">Pinterest Login</a><br>
+2. Paste file cookie ke folder <b>\Pinterest Account Checker</b><br>
+
 
 Input link profil yang akan di cek pada kolom <b>Profile</b>
 <img src="https://blogger.googleusercontent.com/img/a/AVvXsEhNwuwkFXAL0_4Ire3LxCXJ_3PwN_mn9UYgrRpt7HztZpbt7IpzAjsdGVRN7rdArPN8VMCaMeJ9-Bat0EJxO_wk73xNEpEauhxb-77nG583jaDxQ17DNgAzKOEYjzhdGNinQFa_SwMMjCv4SYH3a1V4h06uKquXUhG-miyHzoEYTqfj2yr21LQ8Cqtq3och"/>
