@@ -96,7 +96,7 @@ def check_shadow_status(page, url, profile_text):
 
 # Fungsi utama untuk menjalankan proses menggunakan Playwright
 with sync_playwright() as p:
-    browser = p.chromium.launch(headless=False)
+    browser = p.chromium.launch(headless=True)
     page = browser.new_page()
 
     # Load cookies
