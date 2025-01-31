@@ -27,10 +27,13 @@ async def main():
         print("File status.csv tidak ditemukan di folder script.")
         return
 
-    # Baca file status.csv
+    # Baca seluruh isi file status.csv
     with open(status_file, "r", newline="", encoding="utf-8") as csvfile:
         reader = csv.DictReader(csvfile)
-        rows_to_process = [row for row in reader if not row["Indexed"]]
+        rows = list(reader)  # Simpan semua data di dalam list
+
+    # Filter baris yang akan diproses
+    rows_to_process = [row for row in rows if not row["Indexed"]]
 
     if not rows_to_process:
         print("Semua kolom Indexed sudah terisi. Tidak ada link untuk dibuka.")
@@ -39,8 +42,7 @@ async def main():
     print(f"Ditemukan {len(rows_to_process)} baris untuk diproses.")
 
     async with async_playwright() as p:
-        # Pilih browser (bisa 'chromium', 'firefox', atau 'webkit')
-        browser = await p.chromium.launch(headless=True)
+        browser = await p.chromium.launch(headless=False)
         context = await browser.new_context()
 
         # Muat cookie dari file
@@ -52,58 +54,57 @@ async def main():
         # Buka tab baru
         page = await context.new_page()
 
-        # Proses setiap link di kolom Profile yang Indexed-nya kosong
         for row in rows_to_process:
             original_link = row["Profile"]
             parsed_url = urlparse(original_link)
-            username = parsed_url.path.strip("/").split("/")[0]  # Ambil bagian setelah domain dan hilangkan "/"
-            api_link = f"https://api.pinterest.com/v3/users/{username}/"  # Buat API link            
+            username = parsed_url.path.strip("/").split("/")[0]  # Ambil bagian setelah domain
+            api_link = f"https://api.pinterest.com/v3/users/{username}/"
 
-            # Gunakan tab yang sama untuk membuka link berikutnya
             await page.goto(api_link)
-
-            # Tunggu hingga halaman selesai dimuat
             await page.wait_for_load_state("domcontentloaded")
 
-            # Ekstrak data JSON dari halaman
             content = await page.evaluate("() => document.body.innerText")
+
             try:
-                # Parse JSON
                 json_data = json.loads(content)
 
-                # Cek apakah statusnya "failure"
                 if json_data.get("status") == "failure":
-                    print(f"Pengguna tidak ditemukan untuk {username}. Menandai sebagai Deactive.")
-                    row["Indexed"] = "Deactive"  # Menandai kolom Indexed sebagai "Deactive"
+                    print(f"{username} : Deactive")
+                    row["Indexed"] = "Suspended"
                 else:
                     user_data = json_data.get("data", None)
-                    
+
                     if user_data:
-                        row["Indexed"] = str(user_data.get("indexed", False)).lower()
+                        if user_data.get("seo_noindex_reason") == "user_spam":
+                            print(f"{username} : Shadow Ban")
+                            row["Indexed"] = "Shadow Ban"
+                        else:
+                            print(f"{username} : Active")
+                            row["Indexed"] = str(user_data.get("indexed", False)).lower()
+
                         row["Follower"] = user_data.get("follower_count", 0)
                         row["Following"] = user_data.get("following_count", 0)
                         row["Boards"] = user_data.get("board_count", 0)
                         row["Pins"] = user_data.get("pin_count", 0)
                         row["Views"] = user_data.get("profile_views", 0)
-                        print(f"Data untuk {username} diperbarui.")
+                        
                     else:
                         print(f"Data untuk {username} tidak ditemukan.")
             except json.JSONDecodeError:
                 print(f"Error: Respons dari {api_link} bukan JSON valid.")
 
-            # Tunggu beberapa detik sebelum melanjutkan ke link berikutnya
             await page.wait_for_timeout(random.randint(1000, 2000))
 
-        # Tutup browser setelah selesai memproses semua link
         await browser.close()
         print("Semua link telah diproses. Browser ditutup.")
 
     # Perbarui file status.csv dengan data terbaru
     with open(status_file, "w", newline="", encoding="utf-8") as csvfile:
-        fieldnames = rows_to_process[0].keys()  # Ambil nama kolom dari data
+        fieldnames = rows[0].keys()  # Ambil nama kolom dari data asli
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
-        writer.writerows(rows_to_process)
+        writer.writerows(rows)  # Simpan seluruh data (termasuk yang sudah diperbarui)
+
     print("File status.csv diperbarui dengan nilai terbaru.")
 
 # Jalankan skrip
