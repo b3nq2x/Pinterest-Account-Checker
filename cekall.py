@@ -37,7 +37,7 @@ async def main():
     print(f"Ditemukan {len(rows_to_process)} baris untuk diproses.")
 
     async with async_playwright() as p:
-        browser = await p.chromium.launch(headless=False)
+        browser = await p.chromium.launch(headless=True)
         context = await browser.new_context()
 
         # Load cookies
